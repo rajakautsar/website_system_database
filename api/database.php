@@ -1,5 +1,5 @@
 <?php
-$host = 'https://prosys.dyandraeventsolutions.com/';
+$host = '77.37.79.145';
 $db   = 'rab_system';
 $user = 'ru489872923_admin';
 $pass = 'Syaipnokav6!';
