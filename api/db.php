@@ -1,8 +1,8 @@
 <?php
-$host = '127.0.0.1';
+$host = 'https://prosys.dyandraeventsolutions.com/';
 $db   = 'rab_system';
-$user = 'root';
-$pass = '';
+$user = 'ru489872923_admin';
+$pass = 'Syaipnokav6!';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
