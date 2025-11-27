@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Form Pendaftaran RAB</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-light">
+<div class="container py-4">
+  <header class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h1>📋 Form Pendaftaran RAB</h1>
+      <p class="text-muted">Sistem Database Project Management</p>
+    </div>
+    <div>
+      <a href="rejected_forms.php" class="btn btn-danger me-2">Riwayat Reject</a>
+      <a href="approved_gm_forms.php" class="btn btn-success me-2">Approved GM</a>
+      <a href="logout.php" class="btn btn-outline-secondary me-2">Logout</a>
+    </div>
+  </header>
+
+  <div id="alerts"></div>
+
+  <form id="rabForm" enctype="multipart/form-data">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Informasi Project</h5>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Category</label>
+            <select id="category" name="category" class="form-select">
+              <option value="kp">Kontrak Payung (KP)</option>
+              <option value="sl">Non Kontrak Payung (SL)</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">No Project</label>
+            <input id="noProject" name="no_project" class="form-control" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Nama Project</label>
+            <input id="namaProject" name="nama_project" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Client</label>
+            <input id="client" name="client" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Venue</label>
+            <input id="venue" name="venue" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Event Date Start</label>
+            <input id="eventDateStart" name="event_date_start" type="date" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Event Date End</label>
+            <input id="eventDateEnd" name="event_date_end" type="date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Contract Type</label>
+          <select id="contractType" name="contract_type" class="form-select" required>
+            <option value="">-- Pilih --</option>
+            <option value="KP">KP</option>
+            <option value="SL">SL</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Remarks</label>
+          <textarea id="remarks" name="remarks" class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Data Finansial</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>RAB Submit (Rp)</label>
+            <input id="rabSubmit" name="rab_submit" type="number" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>RAB Internal (Rp)</label>
+            <input id="rabInternal" name="rab_internal" type="number" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>Profit Margin (Rp)</label>
+            <input id="profitMargin" name="profit_margin" type="number" readonly class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>Profit Percentage (%)</label>
+            <input id="profitPercentage" name="profit_percentage" type="text" readonly class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Upload File</h5>
+        <div class="mb-3">
+          <label>Upload SPPH (wajib - pdf/docx)</label>
+          <input id="uploadSPPH" name="file_spph" type="file" accept=".pdf,.docx" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label>Upload SPK (opsional - file)</label>
+          <input id="uploadSPK" name="file_spk" type="file" accept=".pdf,.docx" class="form-control">
+          <div class="form-text">Atau isi link SPK (jika SPK belum tersedia)</div>
+          <input id="spkLink" name="spk_link" class="form-control mt-1" placeholder="Link SPK (opsional)">
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="reset" class="btn btn-secondary">🔄 Reset</button>
+      <button type="button" id="previewBtn" class="btn btn-primary">👁️ Preview</button>
+    </div>
+  </form>
+</div>
+
+<!-- preview modal -->
+<div id="previewModal" class="modal" tabindex="-1" style="display:none; background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5>Preview Data</h5>
+        <button id="closeModal" class="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="previewContent"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="editBtn" class="btn btn-secondary">Edit</button>
+        <button id="confirmSubmitBtn" class="btn btn-success">Confirm Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
