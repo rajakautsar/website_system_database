@@ -34,7 +34,7 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
     </div>
     <div>
       <a href="rejected_forms.php" class="btn btn-danger me-2">Riwayat Reject</a>
-      <a href="approved_gm_forms.php" class="btn btn-success me-2">Approved GM</a>
+      <a href="approved_gm_forms.php" class="btn btn-success me-2">List Project</a>
       <a href="logout.php" class="btn btn-outline-secondary me-2">Logout</a>
     </div>
   </header>

@@ -80,7 +80,7 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
             <tr><th>Status</th><td>".htmlspecialchars($form['status'] ?? '')."</td></tr>
         </table>
         <p>Silakan login ke sistem untuk melihat detail dan melakukan approval / reject ke link berikut:<br>
-        <a href='http://localhost/website_system_database/login.html' target='_blank'>Login Sistem</a></p>
+        <a href='https://prosys.dyandraeventsolutions.com/login.html' target='_blank'>Login Sistem</a></p>
     </body>
     </html>";
 
