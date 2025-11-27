@@ -35,7 +35,6 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
     <div>
       <a href="rejected_forms.php" class="btn btn-danger me-2">Riwayat Reject</a>
       <a href="approved_gm_forms.php" class="btn btn-success me-2">Approved GM</a>
-      <a href="view_logs.php" class="btn btn-info me-2">📋 View Logs</a>
       <a href="logout.php" class="btn btn-outline-secondary me-2">Logout</a>
     </div>
   </header>
@@ -84,15 +83,6 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
             <label class="form-label">Event Date End</label>
             <input id="eventDateEnd" name="event_date_end" type="date" class="form-control" required>
           </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Contract Type</label>
-          <select id="contractType" name="contract_type" class="form-select" required>
-            <option value="">-- Pilih --</option>
-            <option value="KP">KP</option>
-            <option value="SL">SL</option>
-          </select>
         </div>
 
         <div class="mb-3">
