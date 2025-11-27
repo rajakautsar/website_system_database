@@ -1,9 +1,8 @@
 <?php
-// api/database.php - central DB connection and helper query functions for the app
-$host = '127.0.0.1';
+$host = 'https://prosys.dyandraeventsolutions.com/';
 $db   = 'rab_system';
-$user = 'root';
-$pass = '';
+$user = 'ru489872923_admin';
+$pass = 'Syaipnokav6!';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -19,10 +18,6 @@ try {
     echo json_encode(['success' => false, 'message' => 'DB connection failed: ' . $e->getMessage()]);
     exit;
 }
-
-// --- Database helper functions ---
-// Semua fungsi menggunakan global $pdo sehingga file lain tetap bisa menggunakan
-// $pdo = require_once __DIR__ . '/db.php'; atau require 'api/database.php' dan juga memanggil fungsi-fungsi ini.
 
 function getFormsByStatus($status) {
     global $pdo;
@@ -107,7 +102,6 @@ function rejectFormByGM($id, $reason, $approver_id, $approver_name, $approver_em
 
 function getUsersFromTable($table) {
     global $pdo;
-    // $table should be an internal table name (admin_users, pic_users, gm_users, general_users)
     $allowed = ['admin_users','pic_users','gm_users','general_users'];
     if (!in_array($table, $allowed)) return [];
     $stmt = $pdo->query("SELECT username, email, full_name FROM {$table}");

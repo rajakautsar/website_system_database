@@ -35,8 +35,6 @@ foreach ($tables as $info) {
     }
 }
 
-// NOTE: Passwords compared as plain text by request (no hashing).
-// WARNING: This is insecure for production — passwords stored in DB are plain text.
 if ($foundUser && $foundUser['password'] === $password) {
     $_SESSION['user_id'] = $foundUser['id'];
     $_SESSION['username'] = $foundUser['username'];

@@ -1,5 +1,4 @@
 <?php
-// api/log_helper.php - Helper untuk logging
 function writeLog($message, $data = []) {
     $log_dir = __DIR__ . '/../logs';
     if (!is_dir($log_dir)) {

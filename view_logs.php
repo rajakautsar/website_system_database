@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Hanya admin/user yang bisa akses (bukan general user)
 if (!isset($_SESSION['user_id']) || (isset($_SESSION['role']) && $_SESSION['role'] === 'general')) {
     header('Location: login.html');
     exit;
@@ -15,7 +14,7 @@ if (is_dir($log_dir)) {
             $log_files[] = $file;
         }
     }
-    rsort($log_files); // Sort descending (newest first)
+    rsort($log_files); 
 }
 
 $selected_file = $_GET['file'] ?? ($log_files[0] ?? null);
@@ -23,7 +22,7 @@ $log_content = '';
 if ($selected_file && file_exists($log_dir . '/' . $selected_file)) {
     $log_content = file_get_contents($log_dir . '/' . $selected_file);
     $lines = explode("\n", $log_content);
-    $lines = array_reverse($lines); // Show newest first
+    $lines = array_reverse($lines); 
     $log_content = implode("\n", $lines);
 }
 ?>
