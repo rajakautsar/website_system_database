@@ -1,7 +1,7 @@
 <?php
 $host = '77.37.79.145';
 $db   = 'rab_system';
-$user = 'ru489872923_admin';
+$user = 'u489872923_admin';
 $pass = 'Syaipnokav6!';
 $charset = 'utf8mb4';
 
