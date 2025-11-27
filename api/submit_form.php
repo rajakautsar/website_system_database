@@ -12,7 +12,6 @@ $client = $_POST['client'] ?? null;
 $venue = $_POST['venue'] ?? null;
 $event_date_start = $_POST['event_date_start'] ?? null;
 $event_date_end = $_POST['event_date_end'] ?? null;
-$contract_type = $_POST['contract_type'] ?? null;
 $remarks = $_POST['remarks'] ?? null;
 $rab_submit = $_POST['rab_submit'] ?? 0;
 $rab_internal = $_POST['rab_internal'] ?? 0;
@@ -29,7 +28,6 @@ if (!$client) $errors[] = 'Client harus diisi';
 if (!$venue) $errors[] = 'Venue harus diisi';
 if (!$event_date_start) $errors[] = 'Event Date Start harus diisi';
 if (!$event_date_end) $errors[] = 'Event Date End harus diisi';
-if (!$contract_type) $errors[] = 'Contract Type harus dipilih';
 if (!isset($_FILES['file_spph']) || $_FILES['file_spph']['error'] !== UPLOAD_ERR_OK) $errors[] = 'File SPPH wajib diupload';
 
 if (!empty($errors)) {
@@ -60,12 +58,12 @@ $file_spk = isset($_FILES['file_spk']) ? uploadFile($_FILES['file_spk'], $upload
 // insert
 try {
     $stmt = $pdo->prepare('INSERT INTO rab_forms 
-    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,contract_type,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,status,created_by,created_at)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,status,created_by,created_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
 
     $ok = $stmt->execute([
         $category, $no_project, $nama_project, $client, $venue, $event_date_start, $event_date_end,
-        $contract_type, $remarks, $rab_submit, $rab_internal, $profit_margin, $profit_percentage,
+        $remarks, $rab_submit, $rab_internal, $profit_margin, $profit_percentage,
         $file_spph, $file_spk, $spk_link, 'pending_pic', $user_id, date('Y-m-d H:i:s')
     ]);
 

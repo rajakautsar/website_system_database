@@ -48,3 +48,8 @@
 {"ts":"2025-11-27T09:12:50+01:00","role":"gm","data":{"event":"prepared","subject":"Form baru menunggu approval GM","recipients":[{"email":"rajakautsar119@gmail.com"}]},"remote_addr":"::1"}
 {"ts":"2025-11-27T09:12:50+01:00","role":"gm","data":{"event":"sending","from":"no-reply@deslink.id","to":["rajakautsar119@gmail.com"]},"remote_addr":"::1"}
 {"ts":"2025-11-27T09:12:55+01:00","role":"gm","data":{"event":"sent","count":1},"remote_addr":"::1"}
+{"ts":"2025-11-27T17:14:01+01:00","role":"pic","data":{"event":"called_from_submit","form_id":"21","by_user":1},"remote_addr":"::1"}
+{"ts":"2025-11-27T17:14:01+01:00","role":"pic","data":{"event":"prepared","subject":"Form baru menunggu approval PIC Sales","recipients":[{"email":"rajakautsar09@gmail.com"}]},"remote_addr":"::1"}
+{"ts":"2025-11-27T17:14:01+01:00","role":"pic","data":{"event":"sending","from":"no-reply@deslink.id","to":["rajakautsar09@gmail.com"]},"remote_addr":"::1"}
+{"ts":"2025-11-27T17:14:03+01:00","role":"pic","data":{"event":"sent","count":1},"remote_addr":"::1"}
+{"ts":"2025-11-27T17:14:03+01:00","role":"pic","data":{"event":"call_result_submit","form_id":"21","by_user":1,"result":"ok"},"remote_addr":"::1"}
