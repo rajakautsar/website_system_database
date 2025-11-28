@@ -1,10 +1,7 @@
 <?php
-// api/resubmit_form.php - handle resubmission (update) of rejected forms
 header('Content-Type: application/json; charset=utf-8');
 session_start();
 $pdo = require_once __DIR__ . '/db.php';
-
-// helper upload function (same rules as submit_form.php)
 function uploadFile($file, $upload_dir) {
     if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) return null;
     $allowed = ['pdf','docx'];
@@ -20,7 +17,7 @@ function uploadFile($file, $upload_dir) {
 $id = $_POST['id'] ?? null;
 if (!$id) { echo json_encode(['success'=>false,'message'=>'Form ID dibutuhkan']); exit; }
 
-// data
+// dat
 $category = $_POST['category'] ?? 'kp';
 $no_project = $_POST['no_project'] ?? null;
 $nama_project = $_POST['nama_project'] ?? null;
