@@ -1,9 +1,4 @@
 <?php
-// =============================================
-//  send_email.php – FINAL VERSION
-// =============================================
-
-// Simple email logger
 function emailNotificationLog(string $role, array $data) {
     $logDir  = __DIR__ . '/../logs';
     $logFile = $logDir . '/email_notifications.log';
