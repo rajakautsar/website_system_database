@@ -55,10 +55,8 @@ if (previewBtn) {
     if (modal) modal.style.display = 'block';
   });
 }
-
 if (closeModalBtn) closeModalBtn.addEventListener('click', () => { if (modal) modal.style.display = 'none'; });
 if (editBtn) editBtn.addEventListener('click', () => { if (modal) modal.style.display = 'none'; });
-
 if (confirmSubmitBtn) confirmSubmitBtn.addEventListener('click', () => {
   if (modal) modal.style.display = 'none';
   submitForm();
