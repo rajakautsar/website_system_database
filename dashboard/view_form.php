@@ -59,21 +59,25 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
     <?php if (!empty($f['gm_comment'])): ?>
     <tr><th>Komentar GM</th><td><?=nl2br(htmlspecialchars($f['gm_comment']))?></td></tr>
     <?php endif; ?>
+    <tr><th>Email PIC Terpilih</th>
+      <td><?=htmlspecialchars($f['pic_email'] ?? '-')?></td>
+    </tr>
+    <tr><th>Email GM Terpilih</th>
+      <td><?=htmlspecialchars($f['gm_email'] ?? '-')?></td>
+    </tr>
     <?php if (!empty($f['pic_approved_name']) || !empty($f['pic_approved_email'])): ?>
-    <tr><th>PIC Checker</th>
+    <tr><th>Approval PIC</th>
       <td>
         <div><strong><?=htmlspecialchars($f['pic_approved_name'] ?? '-')?></strong></div>
-        <div class="text-muted small"><?=htmlspecialchars($f['pic_approved_email'] ?? '-')?></div>
-        <div class="text-muted small"><?=htmlspecialchars($f['pic_decision_at'] ?? '-')?></div>
+        <div class="text-muted small">Waktu Approval: <?=!empty($f['pic_decision_at']) ? date('d/m/Y H:i', strtotime($f['pic_decision_at'])) : '-'?></div>
       </td>
     </tr>
     <?php endif; ?>
     <?php if (!empty($f['gm_approved_name']) || !empty($f['gm_approved_email'])): ?>
-    <tr><th>GM Checker</th>
+    <tr><th>Approval GM</th>
       <td>
         <div><strong><?=htmlspecialchars($f['gm_approved_name'] ?? '-')?></strong></div>
-        <div class="text-muted small"><?=htmlspecialchars($f['gm_approved_email'] ?? '-')?></div>
-        <div class="text-muted small"><?=htmlspecialchars($f['gm_decision_at'] ?? '-')?></div>
+        <div class="text-muted small">Waktu Approval: <?=!empty($f['gm_decision_at']) ? date('d/m/Y H:i', strtotime($f['gm_decision_at'])) : '-'?></div>
       </td>
     </tr>
     <?php endif; ?>

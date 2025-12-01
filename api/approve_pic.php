@@ -17,9 +17,16 @@ $pin = $_POST['pin'] ?? null;
 if (!$id || !$action) { echo json_encode(['success'=>false,'message'=>'Invalid']); exit; }
 if (!$pin) { echo json_encode(['success'=>false,'message'=>'PIN dibutuhkan']); exit; }
 
-// Validasi PIN
-$email = $_SESSION['email'] ?? null;
-if (!$email) { echo json_encode(['success'=>false,'message'=>'Email tidak ditemukan di session']); exit; }
+// Ambil form untuk dapat email PIC yang dipilih
+$formStmt = $pdo->prepare('SELECT * FROM rab_forms WHERE id = ?');
+$formStmt->execute([$id]);
+$form = $formStmt->fetch();
+
+if (!$form) { echo json_encode(['success'=>false,'message'=>'Form tidak ditemukan']); exit; }
+
+// Gunakan email yang dipilih di form, bukan email session
+$pic_email = $form['pic_email'] ?? null;
+if (!$pic_email) { echo json_encode(['success'=>false,'message'=>'Email PIC tidak ditemukan di form']); exit; }
 
 // Cek PIN master dulu, jika tidak maka cek PIN email spesifik
 $stmt = $pdo->prepare('SELECT pin_hash FROM email_pins WHERE email = ? AND role = ?');
@@ -29,9 +36,9 @@ $masterPin = $stmt->fetch();
 if ($masterPin && password_verify($pin, $masterPin['pin_hash'])) {
     // PIN master valid, lanjut
 } else {
-    // Cek PIN email spesifik
+    // Cek PIN email spesifik (gunakan email dari form, bukan session)
     $stmt = $pdo->prepare('SELECT pin_hash FROM email_pins WHERE email = ? AND role = ?');
-    $stmt->execute([$email, 'pic']);
+    $stmt->execute([$pic_email, 'pic']);
     $pinRow = $stmt->fetch();
     
     if (!$pinRow || !password_verify($pin, $pinRow['pin_hash'])) {
@@ -54,9 +61,6 @@ if ($action === 'approve') {
     
     // Send email notification to GM
     require_once __DIR__ . '/send_email.php';
-    $formStmt = $pdo->prepare('SELECT * FROM rab_forms WHERE id = ?');
-    $formStmt->execute([$id]);
-    $form = $formStmt->fetch();
     if ($form) {
         sendEmailNotification('gm', $form, 'Form baru menunggu approval GM');
     }

@@ -20,7 +20,6 @@ return [
                 'Irfant (irfant.giant@dyandraeventsolutions.com)',
                 'Della (dellaazkia@dyandraeventsolutions.com)',
                 'Admin (admin@dyandraeventsolutions.com)',
-                'tes (rajakautsar09@gmail.com)'
             ]
         ],
         'gm' => [
@@ -31,7 +30,7 @@ return [
                 'Tessya (tessya@dyandraeventsolutions.com)',
                 'Bahri (bahri@dyandraeventsolutions.com)',
                 'Admin (admin@dyandraeventsolutions.com)',
-                'tes (rajakautsar09@gmail.com)'
+                
 
             ]
         ],

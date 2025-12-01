@@ -48,7 +48,6 @@ $forms = $stmt->fetchAll();
           <th>Client</th>
           <th>Venue</th>
           <th>Event Date</th>
-          <th>Contract Type</th>
           <th>GM Checker</th>
           <th>Aksi</th>
         </tr>
@@ -61,13 +60,12 @@ $forms = $stmt->fetchAll();
           <td><?=htmlspecialchars($f['nama_project'])?></td>
           <td><?=htmlspecialchars($f['client'])?></td>
           <td><?=htmlspecialchars($f['venue'])?></td>
-          <td><?=htmlspecialchars($f['event_date_start'])?> - <?=htmlspecialchars($f['event_date_end'])?></td>
-          <td><?=htmlspecialchars($f['contract_type'])?></td>
+          <td><?=date('d/m/Y', strtotime($f['event_date_start']))?> S.d <?=date('d/m/Y', strtotime($f['event_date_end']))?></td>
           <td>
             <?php if ($f['gm_approved_name']): ?>
               <div><strong><?=htmlspecialchars($f['gm_approved_name'])?></strong></div>
-              <div class="small text-muted"><?=htmlspecialchars($f['gm_approved_email'] ?? '-')?></div>
-              <div class="small text-muted"><?=htmlspecialchars($f['gm_decision_at'])?></div>
+              <div class="small text-muted">Email GM: <span class="fw-bold text-primary"><?=htmlspecialchars($f['gm_email'] ?? '-')?></span></div>
+              <div class="small text-muted">Waktu: <?=!empty($f['gm_decision_at']) ? date('d/m/Y H:i', strtotime($f['gm_decision_at'])) : '-'?></div>
               <?php if (!empty($f['gm_comment'])): ?>
                 <div><?=nl2br(htmlspecialchars($f['gm_comment']))?></div>
               <?php endif; ?>

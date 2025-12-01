@@ -18,7 +18,8 @@ $forms = $stmt->fetchAll();
 <body class="p-4">
   <div class="d-flex justify-content-between mb-3">
     <h3>Dashboard PIC - Pending Forms</h3>
-    <div>
+    <div class="d-flex gap-2">
+      <a href="../approved_gm_forms.php?from=dashboard" class="btn btn-sm btn-success" target="_blank">Lihat Form Disetujui GM</a>
       <a href="../logout.php" class="btn btn-sm btn-outline-secondary">Logout</a>
     </div>
   </div>
@@ -32,7 +33,7 @@ $forms = $stmt->fetchAll();
         <td><?=htmlspecialchars($f['no_project'])?></td>
         <td><?=htmlspecialchars($f['nama_project'])?></td>
         <td><?=htmlspecialchars($f['client'])?></td>
-        <td><?=date('d/m/Y H:i', strtotime($f['created_at']))?></td>
+        <td><?=date('d/m/Y', strtotime($f['created_at']))?></td>
         <td>
           <?php if ($f['file_spph']): ?><a href="../uploads/<?=htmlspecialchars($f['file_spph'])?>" download>SPPH</a><?php endif; ?>
           <?php if ($f['file_spk']): ?> | <a href="../uploads/<?=htmlspecialchars($f['file_spk'])?>" download>SPK</a><?php endif; ?>

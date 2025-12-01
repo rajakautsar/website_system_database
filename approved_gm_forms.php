@@ -15,6 +15,7 @@ $stmt = $pdo->prepare('SELECT * FROM rab_forms WHERE status = ? ORDER BY updated
 $stmt->execute(['approved_final']);
 $forms = $stmt->fetchAll();
 $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
+$from_dashboard = ($_GET['from'] ?? null) === 'dashboard'; // Cek apakah datang dari dashboard
 ?>
 <!doctype html>
 <html lang="id">
@@ -35,7 +36,7 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
       <?php if (isset($_SESSION['role'])): ?>
         <a href="logout.php" class="btn btn-sm btn-outline-danger me-2">Logout</a>
       <?php endif; ?>
-      <?php if (!$is_general_user): ?>
+      <?php if (!$is_general_user && !$from_dashboard): ?>
         <a href="form_rab.php" class="btn btn-outline-secondary">⬅️ Kembali</a>
       <?php endif; ?>
     </div>
@@ -70,7 +71,7 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
           <td><?=htmlspecialchars($f['no_project'])?></td>
           <td><?=htmlspecialchars($f['nama_project'])?></td>
           <td><?=htmlspecialchars($f['client'])?></td>
-          <td><?=htmlspecialchars($f['event_date_start'])?> - <?=htmlspecialchars($f['event_date_end'])?></td>
+          <td><?=date('d/m/Y', strtotime($f['event_date_start']))?> S.d <?=date('d/m/Y', strtotime($f['event_date_end']))?></td>
           <?php if (!$is_general_user): ?>
           <td>Rp <?=number_format($f['rab_submit'],0,',','.')?></td>
           <td>Rp <?=number_format($f['profit_margin'],0,',','.')?> (<?=htmlspecialchars($f['profit_percentage'])?>%)</td>
@@ -89,7 +90,7 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
           <td>
             <?php if ($f['pic_approved_name']): ?>
               <div><strong><?=htmlspecialchars($f['pic_approved_name'])?></strong></div>
-              <div class="small text-muted"><?=htmlspecialchars($f['pic_approved_email'] ?? '-')?></div>
+              <div class="small text-muted">Email PIC: <span class="fw-bold text-primary"><?=htmlspecialchars($f['pic_email'] ?? '-')?></span></div>
               <div class="small text-muted"><?=htmlspecialchars($f['pic_decision_at'])?></div>
               <?php if (!empty($f['pic_comment'])): ?>
                 <div><?=nl2br(htmlspecialchars($f['pic_comment']))?></div>
@@ -101,7 +102,7 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
           <td>
             <?php if ($f['gm_approved_name']): ?>
               <div><strong><?=htmlspecialchars($f['gm_approved_name'])?></strong></div>
-              <div class="small text-muted"><?=htmlspecialchars($f['gm_approved_email'] ?? '-')?></div>
+              <div class="small text-muted">Email GM: <span class="fw-bold text-primary"><?=htmlspecialchars($f['gm_email'] ?? '-')?></span></div>
               <div class="small text-muted"><?=htmlspecialchars($f['gm_decision_at'])?></div>
               <?php if (!empty($f['gm_comment'])): ?>
                 <div><?=nl2br(htmlspecialchars($f['gm_comment']))?></div>
