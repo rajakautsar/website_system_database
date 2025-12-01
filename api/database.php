@@ -1,9 +1,9 @@
 <?php
-$host = '127.0.0.1';
-$db   = 'rab_system';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+$host = 'localhost';
+$db   = 'u489872923_rab_system';
+$user = 'u489872923_rab_system';
+$pass = 'Syaipnokav6!';
+$charset='utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
