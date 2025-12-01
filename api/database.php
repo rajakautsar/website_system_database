@@ -49,8 +49,8 @@ function getFormByIdAndStatus($id, $status) {
 function insertRabForm($data) {
     global $pdo;
     $stmt = $pdo->prepare('INSERT INTO rab_forms 
-    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,pic_email,gm_email,status,created_by,created_at)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,contract_type,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,status,created_by,created_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
     $ok = $stmt->execute([
         $data['category'] ?? 'kp',
         $data['no_project'] ?? null,
@@ -67,8 +67,6 @@ function insertRabForm($data) {
         $data['file_spph'] ?? null,
         $data['file_spk'] ?? null,
         $data['spk_link'] ?? null,
-        $data['pic_email'] ?? null,
-        $data['gm_email'] ?? null,
         $data['status'] ?? 'pending_pic',
         $data['created_by'] ?? null,
         $data['created_at'] ?? date('Y-m-d H:i:s')
