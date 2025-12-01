@@ -15,12 +15,30 @@ return [
         'pic' => [
             'from_email' => 'no-reply@deslink.id',
             'from_name'  => 'RAB System - PIC',
-            'force_to'   => ['rajakautsar09@gmail.com']
+            'force_to'   => [
+                'Arifa (arifa@dyandraeventsolutions.com)',
+                'Irfant (irfant.giant@dyandraeventsolutions.com)',
+                'Della (dellaazkia@dyandraeventsolutions.com)',
+                'admin@dyandraeventsolutions.com'
+            ]
         ],
         'gm' => [
             'from_email' => 'no-reply@deslink.id',
             'from_name'  => 'RAB System - GM',
-            'force_to'   => ['rajakautsar119@gmail.com']
+            'force_to'   => [
+                'Andy Soekasah (andysoekasah@dyandraeventsolutions.com)',
+                'Tessya (tessya@dyandraeventsolutions.com)',
+                'Bahri (bahri@dyandraeventsolutions.com)',
+                'admin@dyandraeventsolutions.com'
+
+            ]
+        ],
+        'admin' => [
+            'from_email' => 'no-reply@deslink.id',
+            'from_name'  => 'RAB System - Admin Project',
+            'force_to'   => [
+                'mariatalia@dyandraeventsolutions.com'
+            ]
         ],
     ],
 ];

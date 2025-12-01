@@ -18,6 +18,8 @@ $rab_internal = $_POST['rab_internal'] ?? 0;
 $profit_margin = $_POST['profit_margin'] ?? 0;
 $profit_percentage = $_POST['profit_percentage'] ?? 0;
 $spk_link = $_POST['spk_link'] ?? null;
+$pic_email = $_POST['pic_email'] ?? null;
+$gm_email = $_POST['gm_email'] ?? null;
 $user_id = $_SESSION['user_id'] ?? null;
 
 // validation
@@ -58,13 +60,13 @@ $file_spk = isset($_FILES['file_spk']) ? uploadFile($_FILES['file_spk'], $upload
 // insert
 try {
     $stmt = $pdo->prepare('INSERT INTO rab_forms 
-    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,status,created_by,created_at)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,pic_email,gm_email,status,created_by,created_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
 
     $ok = $stmt->execute([
         $category, $no_project, $nama_project, $client, $venue, $event_date_start, $event_date_end,
         $remarks, $rab_submit, $rab_internal, $profit_margin, $profit_percentage,
-        $file_spph, $file_spk, $spk_link, 'pending_pic', $user_id, date('Y-m-d H:i:s')
+        $file_spph, $file_spk, $spk_link, $pic_email, $gm_email, 'pending_pic', $user_id, date('Y-m-d H:i:s')
     ]);
 
     if ($ok) {

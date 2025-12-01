@@ -15,6 +15,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'general') {
     exit;
 }
 $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
+// load email config for dynamic dropdowns
+$emailConfig = file_exists(__DIR__ . '/api/email_config.php') ? require __DIR__ . '/api/email_config.php' : [];
+$picOptions = $emailConfig['roles']['pic']['force_to'] ?? [];
+$gmOptions = $emailConfig['roles']['gm']['force_to'] ?? [];
 ?>
 <!doctype html>
 <html lang="id">
@@ -71,6 +75,38 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
           <div class="col-md-6 mb-3">
             <label class="form-label">Venue</label>
             <input id="venue" name="venue" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Pilih Email PIC Sales</label>
+            <select id="picEmail" name="pic_email" class="form-select" required>
+              <?php if (!empty($picOptions)): ?>
+                <?php foreach ($picOptions as $p): ?>
+                  <option value="<?=htmlspecialchars($p)?>"><?=htmlspecialchars($p)?></option>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <option value="arifa@dyandraeventsolutions.com">Arifa (arifa@dyandraeventsolutions.com)</option>
+                <option value="irfant.giant@dyandraeventsolutions.com">Irfant (irfant.giant@dyandraeventsolutions.com)</option>
+                <option value="dellaazkia@dyandraeventsolutions.com">Della (dellaazkia@dyandraeventsolutions.com)</option>
+              <?php endif; ?>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Pilih Email GM Sales</label>
+            <select id="gmEmail" name="gm_email" class="form-select" required>
+              <?php if (!empty($gmOptions)): ?>
+                <?php foreach ($gmOptions as $g): ?>
+                  <option value="<?=htmlspecialchars($g)?>"><?=htmlspecialchars($g)?></option>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <option value="andysoekasah@dyandraeventsolutions.com">Andy Soekasah (andysoekasah@dyandraeventsolutions.com)</option>
+                <option value="tessya@dyandraeventsolutions.com">Tessya (tessya@dyandraeventsolutions.com)</option>
+                <option value="bahri@dyandraeventsolutions.com">Bahri (bahri@dyandraeventsolutions.com)</option>
+                <option value="admin@dyandraeventsolutions.com">Tes (admin@dyandraeventsolutions.com)</option>
+              <?php endif; ?>
+            </select>
           </div>
         </div>
 

@@ -67,6 +67,10 @@ $forms = $stmt->fetchAll();
     const el_profit_margin = getEl('edit_profit_margin', 'profit_margin'); if (el_profit_margin) el_profit_margin.value = data.profit_margin || 0;
     const el_profit_percentage = getEl('edit_profit_percentage', 'profit_percentage'); if (el_profit_percentage) el_profit_percentage.value = data.profit_percentage || 0;
     const el_spk_link = getEl('edit_spk_link', 'spk_link'); if (el_spk_link) el_spk_link.value = data.spk_link || '';
+      const el_pic_email = getEl('edit_pic_email', 'pic_email'); if (el_pic_email) el_pic_email.value = data.pic_email || '';
+      const el_gm_email = getEl('edit_gm_email', 'gm_email'); if (el_gm_email) el_gm_email.value = data.gm_email || '';
+      const hiddenPic = document.getElementById('hidden_pic_email'); if (hiddenPic) hiddenPic.value = data.pic_email || '';
+      const hiddenGm = document.getElementById('hidden_gm_email'); if (hiddenGm) hiddenGm.value = data.gm_email || '';
 
     // show existing filenames
     const cur_spph = document.getElementById('current_spph'); if (cur_spph) cur_spph.textContent = data.file_spph || '-';
@@ -142,6 +146,13 @@ $forms = $stmt->fetchAll();
             <label>File SPK (current: <span id="current_spk">-</span>)</label>
             <input type="file" name="file_spk" class="form-control">
           </div>
+            <div class="row">
+              <div class="col-md-6 mb-2"><label>PIC Email (terpilih)</label><input readonly class="form-control-plaintext" id="edit_pic_email" name="pic_email_display"></div>
+              <div class="col-md-6 mb-2"><label>GM Email (terpilih)</label><input readonly class="form-control-plaintext" id="edit_gm_email" name="gm_email_display"></div>
+            </div>
+            <!-- keep hidden values to post if needed, but readonly display prevents changing -->
+            <input type="hidden" name="pic_email" id="hidden_pic_email">
+            <input type="hidden" name="gm_email" id="hidden_gm_email">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

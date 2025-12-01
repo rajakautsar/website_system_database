@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$db   = 'u489872923_rab_system';
-$user = 'u489872923_rab_system';
-$pass = 'Syaipnokav6!';
+$host = '127.0.0.1';
+$db   = 'rab_system';
+$user = 'root';
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -49,8 +49,8 @@ function getFormByIdAndStatus($id, $status) {
 function insertRabForm($data) {
     global $pdo;
     $stmt = $pdo->prepare('INSERT INTO rab_forms 
-    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,contract_type,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,status,created_by,created_at)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+    (category,no_project,nama_project,client,venue,event_date_start,event_date_end,remarks,rab_submit,rab_internal,profit_margin,profit_percentage,file_spph,file_spk,spk_link,pic_email,gm_email,status,created_by,created_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
     $ok = $stmt->execute([
         $data['category'] ?? 'kp',
         $data['no_project'] ?? null,
@@ -59,7 +59,6 @@ function insertRabForm($data) {
         $data['venue'] ?? null,
         $data['event_date_start'] ?? null,
         $data['event_date_end'] ?? null,
-        $data['contract_type'] ?? null,
         $data['remarks'] ?? null,
         $data['rab_submit'] ?? 0,
         $data['rab_internal'] ?? 0,
@@ -68,6 +67,8 @@ function insertRabForm($data) {
         $data['file_spph'] ?? null,
         $data['file_spk'] ?? null,
         $data['spk_link'] ?? null,
+        $data['pic_email'] ?? null,
+        $data['gm_email'] ?? null,
         $data['status'] ?? 'pending_pic',
         $data['created_by'] ?? null,
         $data['created_at'] ?? date('Y-m-d H:i:s')

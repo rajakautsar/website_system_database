@@ -14,6 +14,8 @@ const profitPercentageInput = document.getElementById("profitPercentage");
 const fileSPPHInput = document.getElementById("uploadSPPH");
 const fileSPKInput = document.getElementById("uploadSPK");
 const spkLinkInput = document.getElementById("spkLink");
+const picEmailInput = document.getElementById("picEmail");
+const gmEmailInput = document.getElementById("gmEmail");
 
 const modal = document.getElementById("previewModal");
 const previewBtn = document.getElementById("previewBtn");
@@ -43,6 +45,8 @@ if (previewBtn) {
       <p><strong>Venue:</strong> ${venueInput?.value || ''}</p>
       <p><strong>Event Date:</strong> ${eventDateStartInput?.value || ''} s/d ${eventDateEndInput?.value || ''}</p>
       <p><strong>Remarks:</strong> ${remarksInput?.value || '-'}</p>
+      <p><strong>PIC Email:</strong> ${picEmailInput?.value || '-'}</p>
+      <p><strong>GM Email:</strong> ${gmEmailInput?.value || '-'}</p>
       <p><strong>RAB Submit:</strong> Rp ${rabSubmitInput?.value || '0'}</p>
       <p><strong>RAB Internal:</strong> Rp ${rabInternalInput?.value || '0'}</p>
       <p><strong>Profit (Rp):</strong> Rp ${profitMarginInput?.value || '0'}</p>
@@ -82,6 +86,8 @@ async function submitForm() {
   fd.append('event_date_start', eventDateStartInput?.value || '');
   fd.append('event_date_end', eventDateEndInput?.value || '');
   fd.append('remarks', remarksInput?.value || '');
+  fd.append('pic_email', picEmailInput?.value || '');
+  fd.append('gm_email', gmEmailInput?.value || '');
   fd.append('rab_submit', rabSubmitInput?.value || '0');
   fd.append('rab_internal', rabInternalInput?.value || '0');
   fd.append('profit_margin', profitMarginInput?.value || '0');

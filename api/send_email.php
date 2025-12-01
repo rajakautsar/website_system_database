@@ -47,6 +47,16 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
         return false;
     }
 
+    // Jika form mengandung alamat email spesifik (pic_email/gm_email), gunakan itu sebagai penerima tunggal
+    if (is_array($form)) {
+        if ($recipient_role === 'pic' && !empty($form['pic_email'])) {
+            $recipients = [[ 'email' => $form['pic_email'], 'username' => strstr($form['pic_email'], '@', true), 'full_name' => null ]];
+        }
+        if ($recipient_role === 'gm' && !empty($form['gm_email'])) {
+            $recipients = [[ 'email' => $form['gm_email'], 'username' => strstr($form['gm_email'], '@', true), 'full_name' => null ]];
+        }
+    }
+
     if (!$recipients) {
         emailNotificationLog($recipient_role, ['event' => 'no_recipients']);
         return false;
@@ -92,8 +102,14 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
     // Apply override per role
     $roleConfig = $emailConfig['roles'][$recipient_role] ?? [];
 
-    // Forced recipients per role
-    if (!empty($roleConfig['force_to'])) {
+    // Forced recipients per role — only apply if no per-form recipient was provided
+    $hasPerFormRecipient = false;
+    if (is_array($form)) {
+        if ($recipient_role === 'pic' && !empty($form['pic_email'])) $hasPerFormRecipient = true;
+        if ($recipient_role === 'gm' && !empty($form['gm_email'])) $hasPerFormRecipient = true;
+    }
+
+    if (!empty($roleConfig['force_to']) && !$hasPerFormRecipient) {
         $recipients = array_map(fn($e) => [
             'email' => $e,
             'username' => strstr($e, '@', true),
