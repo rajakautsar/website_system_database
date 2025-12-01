@@ -28,3 +28,21 @@
 {"ts":"2025-12-01T06:07:18+01:00","role":"pic","data":{"event":"prepared","subject":"Form baru menunggu approval PIC Sales","recipients":[{"email":"Admin (admin@dyandraeventsolutions.com)"}]},"remote_addr":"::1"}
 {"ts":"2025-12-01T06:07:18+01:00","role":"pic","data":{"event":"failed","error":"Invalid address:  (to): Admin (admin@dyandraeventsolutions.com)"},"remote_addr":"::1"}
 {"ts":"2025-12-01T06:07:18+01:00","role":"pic","data":{"event":"call_result_submit","form_id":"27","by_user":1,"result":"failed"},"remote_addr":"::1"}
+{"ts":"2025-12-01T06:26:32+01:00","role":"pic","data":{"event":"called_from_submit","form_id":"28","by_user":1},"remote_addr":"::1"}
+{"ts":"2025-12-01T06:26:32+01:00","role":"pic","data":{"event":"prepared","subject":"Form baru menunggu approval PIC Sales","recipients":[{"email":"Admin (admin@dyandraeventsolutions.com)"}]},"remote_addr":"::1"}
+{"ts":"2025-12-01T06:26:32+01:00","role":"pic","data":{"event":"failed","error":"Invalid address:  (to): Admin (admin@dyandraeventsolutions.com)"},"remote_addr":"::1"}
+{"ts":"2025-12-01T06:26:32+01:00","role":"pic","data":{"event":"call_result_submit","form_id":"28","by_user":1,"result":"failed"},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:28:55+01:00","role":"pic","data":{"event":"called_from_submit","form_id":"29","by_user":1},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:28:55+01:00","role":"pic","data":{"event":"prepared","subject":"Form baru menunggu approval PIC Sales","recipients":[{"email":"tes (rajakautsar09@gmail.com"}]},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:28:55+01:00","role":"pic","data":{"event":"failed","error":"Invalid address:  (to): tes (rajakautsar09@gmail.com"},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:28:55+01:00","role":"pic","data":{"event":"call_result_submit","form_id":"29","by_user":1,"result":"failed"},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:37:48+01:00","role":"pic","data":{"event":"called_from_submit","form_id":"30","by_user":1},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:37:48+01:00","role":"pic","data":{"event":"prepared","subject":"Form baru menunggu approval PIC Sales","recipients":[{"email":"rajakautsar09@gmail.com"}]},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:37:48+01:00","role":"pic","data":{"event":"sending","from":"no-reply@deslink.id","to":["rajakautsar09@gmail.com"]},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:38:12+01:00","role":"pic","data":{"event":"sent","count":1},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:38:12+01:00","role":"pic","data":{"event":"call_result_submit","form_id":"30","by_user":1,"result":"ok"},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:47:05+01:00","role":"pic","data":{"event":"called_from_submit","form_id":"31","by_user":1},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:47:05+01:00","role":"pic","data":{"event":"prepared","subject":"Form baru menunggu approval PIC Sales","recipients":[{"email":"rajakautsar09@gmail.com"}]},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:47:05+01:00","role":"pic","data":{"event":"sending","from":"no-reply@deslink.id","to":["rajakautsar09@gmail.com"]},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:47:24+01:00","role":"pic","data":{"event":"sent","count":1},"remote_addr":"::1"}
+{"ts":"2025-12-01T07:47:24+01:00","role":"pic","data":{"event":"call_result_submit","form_id":"31","by_user":1,"result":"ok"},"remote_addr":"::1"}

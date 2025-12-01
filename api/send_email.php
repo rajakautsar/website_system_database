@@ -1,4 +1,13 @@
 <?php
+// Helper: Extract clean email from "Name (email@domain.com)" format or return as-is
+function cleanEmailAddress($email) {
+    if (strpos($email, '(') !== false && strpos($email, ')') !== false) {
+        preg_match('/\(([^)]+)\)/', $email, $matches);
+        return $matches[1] ?? trim($email);
+    }
+    return trim($email);
+}
+
 function emailNotificationLog(string $role, array $data) {
     $logDir  = __DIR__ . '/../logs';
     $logFile = $logDir . '/email_notifications.log';
@@ -39,7 +48,7 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
 
     $table = $tableMap[$recipient_role];
 
-    // Ambil daftar penerima dari DB
+    // Ambil daftar penerima dari DB (default)
     try {
         $recipients = $pdo->query("SELECT username, email, full_name FROM {$table}")->fetchAll();
     } catch (Exception $e) {
@@ -47,12 +56,17 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
         return false;
     }
 
+    // Prioritas 1: Gunakan per-form recipient jika ada (pic_email/gm_email)
+    $hasPerFormRecipient = false;
     if (is_array($form)) {
         if ($recipient_role === 'pic' && !empty($form['pic_email'])) {
-            $recipients = [[ 'email' => $form['pic_email'], 'username' => strstr($form['pic_email'], '@', true), 'full_name' => null ]];
-        }
-        if ($recipient_role === 'gm' && !empty($form['gm_email'])) {
-            $recipients = [[ 'email' => $form['gm_email'], 'username' => strstr($form['gm_email'], '@', true), 'full_name' => null ]];
+            $cleanEmail = cleanEmailAddress($form['pic_email']);
+            $recipients = [[ 'email' => $cleanEmail, 'username' => strstr($cleanEmail, '@', true), 'full_name' => null ]];
+            $hasPerFormRecipient = true;
+        } elseif ($recipient_role === 'gm' && !empty($form['gm_email'])) {
+            $cleanEmail = cleanEmailAddress($form['gm_email']);
+            $recipients = [[ 'email' => $cleanEmail, 'username' => strstr($cleanEmail, '@', true), 'full_name' => null ]];
+            $hasPerFormRecipient = true;
         }
     }
 
@@ -102,16 +116,10 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
     $roleConfig = $emailConfig['roles'][$recipient_role] ?? [];
 
     // Forced recipients per role — only apply if no per-form recipient was provided
-    $hasPerFormRecipient = false;
-    if (is_array($form)) {
-        if ($recipient_role === 'pic' && !empty($form['pic_email'])) $hasPerFormRecipient = true;
-        if ($recipient_role === 'gm' && !empty($form['gm_email'])) $hasPerFormRecipient = true;
-    }
-
-    if (!empty($roleConfig['force_to']) && !$hasPerFormRecipient) {
+    if (!$hasPerFormRecipient && !empty($roleConfig['force_to'])) {
         $recipients = array_map(fn($e) => [
-            'email' => $e,
-            'username' => strstr($e, '@', true),
+            'email' => cleanEmailAddress($e),
+            'username' => strstr(cleanEmailAddress($e), '@', true),
             'full_name' => null
         ], $roleConfig['force_to']);
     }
@@ -149,8 +157,8 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
 
             $toList = [];
             foreach ($recipients as $u) {
-                $to = $u['email'] ?? null;
-                if ($to) {
+                $to = cleanEmailAddress($u['email'] ?? null);
+                if ($to && filter_var($to, FILTER_VALIDATE_EMAIL)) {
                     $mail->addAddress($to, $u['full_name'] ?? $u['username']);
                     $toList[] = $to;
                 }

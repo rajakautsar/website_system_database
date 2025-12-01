@@ -4,7 +4,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'gm') {
     header('Location: ../login.html'); exit;
 }
 $pdo = require_once __DIR__ . '/../api/db.php';
-$stmt = $pdo->prepare('SELECT * FROM rab_forms WHERE status = ? ORDER BY created_at DESC');
+$stmt = $pdo->prepare('SELECT * FROM rab_forms WHERE status = ? ORDER BY created_at DESC, id DESC');
 $stmt->execute(['pending_gm']);
 $forms = $stmt->fetchAll();
 ?>
@@ -22,7 +22,7 @@ $forms = $stmt->fetchAll();
   </div>
 
   <table class="table table-striped">
-    <thead><tr><th>ID</th><th>No Project</th><th>Nama</th><th>Client</th><th>Files</th><th>Komentar PIC</th><th>Action</th></tr></thead>
+    <thead><tr><th>ID</th><th>No Project</th><th>Nama</th><th>Client</th><th>Tanggal Masuk</th><th>Files</th><th>Komentar PIC</th><th>Action</th></tr></thead>
     <tbody>
     <?php foreach ($forms as $f): ?>
       <tr>
@@ -30,6 +30,7 @@ $forms = $stmt->fetchAll();
         <td><?=htmlspecialchars($f['no_project'])?></td>
         <td><?=htmlspecialchars($f['nama_project'])?></td>
         <td><?=htmlspecialchars($f['client'])?></td>
+        <td><?=date('d/m/Y H:i', strtotime($f['created_at']))?></td>
         <td>
           <?php if ($f['file_spph']): ?><a href="../uploads/<?=htmlspecialchars($f['file_spph'])?>" download>SPPH</a><?php endif; ?>
           <?php if ($f['file_spk']): ?> | <a href="../uploads/<?=htmlspecialchars($f['file_spk'])?>" download>SPK</a><?php endif; ?>

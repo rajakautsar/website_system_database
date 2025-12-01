@@ -17,8 +17,18 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'general') {
 $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
 // load email config for dynamic dropdowns
 $emailConfig = file_exists(__DIR__ . '/api/email_config.php') ? require __DIR__ . '/api/email_config.php' : [];
-$picOptions = $emailConfig['roles']['pic']['force_to'] ?? [];
-$gmOptions = $emailConfig['roles']['gm']['force_to'] ?? [];
+
+// Helper: Extract clean email from "Name (email@domain.com)" format
+function extractEmail($formatted) {
+    if (strpos($formatted, '(') !== false && strpos($formatted, ')') !== false) {
+        preg_match('/\(([^)]+)\)/', $formatted, $matches);
+        return $matches[1] ?? $formatted;
+    }
+    return $formatted;
+}
+
+$picOptions = array_map('extractEmail', $emailConfig['roles']['pic']['force_to'] ?? []);
+$gmOptions = array_map('extractEmail', $emailConfig['roles']['gm']['force_to'] ?? []);
 ?>
 <!doctype html>
 <html lang="id">
