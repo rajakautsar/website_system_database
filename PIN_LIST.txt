@@ -1,0 +1,61 @@
+================================================================================
+DAFTAR PIN UNTUK APPROVAL/REJECT SYSTEM
+================================================================================
+
+MASTER PIN (Bisa digunakan untuk semua role PIC, GM, dan Admin):
+-----------------------------------------------------------------
+PIN: 0000
+
+
+EMAIL PIC SALES:
+----------------
+Arifa
+Email: arifa@dyandraeventsolutions.com
+PIN: 1234
+
+Irfant
+Email: irfant.giant@dyandraeventsolutions.com
+PIN: 5678
+
+Della
+Email: dellaazkia@dyandraeventsolutions.com
+PIN: 9012
+
+
+EMAIL GM SALES:
+----------------
+Andy Soekasah
+Email: andysoekasah@dyandraeventsolutions.com
+PIN: 3456
+
+Tessya
+Email: tessya@dyandraeventsolutions.com
+PIN: 7890
+
+Bahri
+Email: bahri@dyandraeventsolutions.com
+PIN: 2345
+
+Tes (Admin)
+Email: admin@dyandraeventsolutions.com
+PIN: 6789
+
+
+EMAIL ADMIN PROJECT:
+--------------------
+Talia
+Email: mariatalia@dyandraeventsolutions.com
+PIN: 9999
+
+Note: admin@dyandraeventsolutions.com memiliki 2 PIN:
+  - PIN 6789 untuk role GM
+  - PIN 9999 untuk role Admin Project (jika diperlukan)
+
+================================================================================
+
+CATATAN PENGGUNAAN:
+- PIN Master 0000 dapat digunakan untuk approval/reject di semua dashboard (PIC, GM, Admin)
+- Setiap role juga punya PIN pribadi berdasarkan email masing-masing
+- Jika PIN salah, sistem akan menolak dan menampilkan pesan "PIN salah"
+
+================================================================================

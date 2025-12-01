@@ -47,7 +47,6 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
         return false;
     }
 
-    // Jika form mengandung alamat email spesifik (pic_email/gm_email), gunakan itu sebagai penerima tunggal
     if (is_array($form)) {
         if ($recipient_role === 'pic' && !empty($form['pic_email'])) {
             $recipients = [[ 'email' => $form['pic_email'], 'username' => strstr($form['pic_email'], '@', true), 'full_name' => null ]];

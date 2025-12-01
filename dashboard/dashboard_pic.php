@@ -47,24 +47,73 @@ $forms = $stmt->fetchAll();
     </tbody>
   </table>
 
+  <!-- PIN Modal -->
+  <div class="modal fade" id="pinModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Verifikasi PIN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="pinAction"></p>
+          <input type="password" id="pinInput" class="form-control" placeholder="Masukkan PIN Anda" maxlength="4">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary" id="pinSubmitBtn">Verifikasi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.querySelectorAll('.do-action').forEach(btn => btn.addEventListener('click', async e => {
+let pendingAction = { id: null, action: null, reason: null, comment: null };
+const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+
+document.querySelectorAll('.do-action').forEach(btn => btn.addEventListener('click', e => {
   const id = e.target.dataset.id;
   const action = e.target.dataset.action;
+  
   if (action === 'reject') {
     const reason = prompt('Masukkan alasan reject (wajib):');
     if (!reason) { alert('Alasan reject dibutuhkan'); return; }
-    const fd = new FormData(); fd.append('id', id); fd.append('action', 'reject'); fd.append('reason', reason);
-    const res = await fetch('../api/approve_pic.php', {method:'POST', body:fd});
-    const j = await res.json(); alert(j.message); location.reload();
+    pendingAction = { id, action, reason, comment: null };
+    document.getElementById('pinAction').textContent = 'Masukkan PIN untuk REJECT form ini.';
+    document.getElementById('pinInput').value = '';
+    pinModal.show();
   } else {
     const comment = prompt('Masukkan komentar approval (opsional):');
-    const fd = new FormData(); fd.append('id', id); fd.append('action', 'approve');
-    if (comment) fd.append('comment', comment);
-    const res = await fetch('../api/approve_pic.php', {method:'POST', body:fd});
-    const j = await res.json(); alert(j.message); location.reload();
+    pendingAction = { id, action, comment };
+    document.getElementById('pinAction').textContent = 'Masukkan PIN untuk APPROVE form ini.';
+    document.getElementById('pinInput').value = '';
+    pinModal.show();
   }
 }));
+
+document.getElementById('pinSubmitBtn').addEventListener('click', async () => {
+  const pin = document.getElementById('pinInput').value;
+  if (!pin) { alert('PIN harus diisi'); return; }
+  
+  const fd = new FormData();
+  fd.append('id', pendingAction.id);
+  fd.append('action', pendingAction.action);
+  fd.append('pin', pin);
+  if (pendingAction.reason) fd.append('reason', pendingAction.reason);
+  if (pendingAction.comment) fd.append('comment', pendingAction.comment);
+  
+  try {
+    const res = await fetch('../api/approve_pic.php', { method: 'POST', body: fd });
+    const j = await res.json();
+    alert(j.message);
+    if (j.success) location.reload();
+    else pinModal.show();
+  } catch (err) {
+    alert('Error: ' + err.message);
+    pinModal.show();
+  }
+});
 </script>
 </body>
 </html>
