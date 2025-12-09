@@ -4,8 +4,8 @@ require_once __DIR__ . '/api/log_helper.php';
 logPageAccess('form_rab.php');
 
 if (!isset($_SESSION['user_id'])) {
-    logRedirect('form_rab.php', 'login.html', 'No session');
-    header('Location: login.html');
+    logRedirect('form_rab.php', 'login.php', 'No session');
+    header('Location: login.php');
     exit;
 }
 // Redirect general user langsung ke general_approved_forms.php
@@ -30,32 +30,24 @@ function extractEmail($formatted) {
 $picOptions = array_map('extractEmail', $emailConfig['roles']['pic']['force_to'] ?? []);
 $gmOptions = array_map('extractEmail', $emailConfig['roles']['gm']['force_to'] ?? []);
 ?>
-<!doctype html>
-<html lang="id">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Form Pendaftaran RAB</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
-</head>
-<body class="bg-light">
-<div class="container py-4">
-  <header class="d-flex justify-content-between align-items-center mb-3">
-    <div>
-      <h1>📋 Form Pendaftaran RAB</h1>
-      <p class="text-muted">Sistem Database Project Management</p>
-    </div>
-    <div>
-      <a href="rejected_forms.php" class="btn btn-danger me-2">Riwayat Reject</a>
-      <a href="approved_gm_forms.php" class="btn btn-success me-2">List Project</a>
-      <a href="logout.php" class="btn btn-outline-secondary me-2">Logout</a>
-    </div>
-  </header>
+<?php $pageTitle = 'Form Pendaftaran RAB'; include __DIR__ . '/includes/head.php'; ?>
+<div class="page-wrapper">
+  <div class="container py-4">
+    <header class="d-flex justify-content-between align-items-center">
+      <div>
+        <h1>Form Pendaftaran RAB</h1>
+        <p class="text-muted">Sistem Database Project Management</p>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="rejected_forms.php" class="btn btn-outline-danger">Riwayat Reject</a>
+        <a href="approved_gm_forms.php" class="btn btn-success">List Project</a>
+        <a href="logout.php" class="btn btn-outline-secondary">Logout</a>
+      </div>
+    </header>
 
-  <div id="alerts"></div>
+    <div id="alerts"></div>
 
-  <form id="rabForm" enctype="multipart/form-data">
+    <form id="rabForm" enctype="multipart/form-data">
     <div class="card mb-3">
       <div class="card-body">
         <h5>Informasi Project</h5>
@@ -181,7 +173,7 @@ $gmOptions = array_map('extractEmail', $emailConfig['roles']['gm']['force_to'] ?
     </div>
 
     <div class="d-flex gap-2">
-      <button type="reset" class="btn btn-secondary">🔄 Reset</button>
+      <button type="reset" class="btn btn-accent-soft">🔄 Reset</button>
       <button type="button" id="previewBtn" class="btn btn-primary">👁️ Preview</button>
     </div>
   </form>
@@ -205,7 +197,9 @@ $gmOptions = array_map('extractEmail', $emailConfig['roles']['gm']['force_to'] ?
     </div>
   </div>
 </div>
+  </div>
+</div>
 
 <script src="assets/app.js"></script>
-</body>
-</html>
+<?php include __DIR__ . '/includes/scripts.php'; ?>
+

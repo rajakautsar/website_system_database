@@ -3,11 +3,8 @@ $pdo = require_once __DIR__ . '/api/db.php';
 $stmt = $pdo->query("SELECT * FROM rab_forms WHERE status IN ('rejected_pic','rejected_gm') ORDER BY updated_at DESC");
 $forms = $stmt->fetchAll();
 ?>
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Rejected Forms</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"></head>
-<body class="p-4">
+<?php $pageTitle = 'Rejected Forms'; include __DIR__ . '/includes/head.php'; ?>
+<div class="p-4">
   <h3>Riwayat Form Ditolak</h3>
   <div class="mb-3">
     <a href="form_rab.php" class="btn btn-sm btn-secondary">&larr; Kembali ke Form Pendaftaran RAB</a>
@@ -162,5 +159,4 @@ $forms = $stmt->fetchAll();
       </div>
     </div>
   </div>
-</body>
-</html>
+<?php include __DIR__ . '/includes/scripts.php'; ?>

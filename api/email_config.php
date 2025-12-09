@@ -19,7 +19,7 @@ return [
                 'Arifa (arifa@dyandraeventsolutions.com)',
                 'Irfant (irfant.giant@dyandraeventsolutions.com)',
                 'Della (dellaazkia@dyandraeventsolutions.com)',
-                'Admin (admin@dyandraeventsolutions.com)',
+                'Admin (admin@dyandraeventsolutions.com)'
             ]
         ],
         'gm' => [
@@ -30,8 +30,6 @@ return [
                 'Tessya (tessya@dyandraeventsolutions.com)',
                 'Bahri (bahri@dyandraeventsolutions.com)',
                 'Admin (admin@dyandraeventsolutions.com)',
-                
-
             ]
         ],
         'admin' => [

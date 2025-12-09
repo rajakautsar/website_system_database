@@ -5,8 +5,8 @@ require_once __DIR__ . '/api/log_helper.php';
 logPageAccess('index.php');
 
 if (!isset($_SESSION['user_id'])) {
-    logRedirect('index.php', 'login.html', 'No session');
-    header('Location: login.html');
+    logRedirect('index.php', 'login.php', 'No session');
+    header('Location: login.php');
     exit;
 }
 

@@ -25,11 +25,8 @@ $f = $stmt->fetch();
 if (!$f) { echo "Form not found"; exit; }
 $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
 ?>
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>View Form</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"></head>
-<body class="p-4">
+<?php $pageTitle = 'View Form'; include __DIR__ . '/../includes/head.php'; ?>
+<div class="p-4">
   <h4>Detail Form #<?=htmlspecialchars($f['id'])?></h4>
   <table class="table table-bordered">
     <tr><th>Category</th><td><?=htmlspecialchars($f['category'])?></td></tr>
@@ -83,5 +80,4 @@ $is_general_user = false; // Setelah redirect, ini tidak akan pernah true
     <?php endif; ?>
   </table>
   <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/scripts.php'; ?>

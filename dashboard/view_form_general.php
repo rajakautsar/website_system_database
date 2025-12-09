@@ -6,8 +6,8 @@ logPageAccess('dashboard/view_form_general.php', "id=$id");
 
 // Hanya general user yang bisa akses halaman ini
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'general') {
-    logRedirect('dashboard/view_form_general.php', 'login.html', 'Unauthorized access');
-    header('Location: ../login.html');
+    logRedirect('dashboard/view_form_general.php', 'login.php', 'Unauthorized access');
+    header('Location: ../login.php');
     exit;
 }
 
@@ -27,14 +27,8 @@ if (!$f) {
     exit;
 }
 ?>
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Detail Form - General User</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="p-4">
+<?php $pageTitle = 'Detail Form - General User'; include __DIR__ . '/../includes/head.php'; ?>
+<div class="p-4">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h4>Detail Form #<?=htmlspecialchars($f['id'])?></h4>
@@ -84,6 +78,5 @@ if (!$f) {
       </div>
     </div>
   </div>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/scripts.php'; ?>
 

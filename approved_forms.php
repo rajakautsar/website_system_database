@@ -4,11 +4,8 @@ $stmt = $pdo->prepare('SELECT * FROM rab_forms WHERE status = ? ORDER BY created
 $stmt->execute(['approved_final']);
 $forms = $stmt->fetchAll();
 ?>
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Approved Forms</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"></head>
-<body class="p-4">
+<?php $pageTitle = 'Approved Forms'; include __DIR__ . '/includes/head.php'; ?>
+<div class="p-4">
   <h3>Approved Forms (Final)</h3>
   <table class="table table-striped">
     <thead><tr><th>ID</th><th>No Project</th><th>Nama</th><th>Client</th><th>Event Date</th><th>Files</th></tr></thead>
@@ -28,5 +25,4 @@ $forms = $stmt->fetchAll();
     <?php endforeach; ?>
     </tbody>
   </table>
-</body>
-</html>
+<?php include __DIR__ . '/includes/scripts.php'; ?>

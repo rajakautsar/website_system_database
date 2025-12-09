@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id']) || (isset($_SESSION['role']) && $_SESSION['role'] === 'general')) {
-    header('Location: login.html');
+    header('Location: login.php');
     exit;
 }
 
@@ -26,36 +26,16 @@ if ($selected_file && file_exists($log_dir . '/' . $selected_file)) {
     $log_content = implode("\n", $lines);
 }
 ?>
-<!doctype html>
-<html lang="id">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>View Logs - RAB System</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .log-content {
-      background: #1e1e1e;
-      color: #d4d4d4;
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      padding: 15px;
-      border-radius: 5px;
-      max-height: 600px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-    .log-line {
-      margin-bottom: 2px;
-    }
-    .log-redirect { color: #4ec9b0; }
-    .log-login-success { color: #4fc1ff; }
-    .log-login-failed { color: #f48771; }
-    .log-page-access { color: #ce9178; }
-  </style>
-</head>
-<body class="bg-light">
+<?php $pageTitle = 'Logs'; include __DIR__ . '/includes/head.php'; ?>
+
+<style>
+.log-content { background: #1e1e1e; color: #d4d4d4; font-family: 'Courier New', monospace; font-size:12px; padding:15px; border-radius:5px; max-height:600px; overflow-y:auto; white-space:pre-wrap; word-wrap:break-word }
+.log-line{margin-bottom:2px}
+.log-redirect{color:#4ec9b0}
+.log-login-success{color:#4fc1ff}
+.log-login-failed{color:#f48771}
+.log-page-access{color:#ce9178}
+</style>
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>📋 Access Logs</h3>
@@ -127,6 +107,5 @@ function clearLog() {
   }
 }
 </script>
-</body>
-</html>
+<?php include __DIR__ . '/includes/scripts.php'; ?>
 

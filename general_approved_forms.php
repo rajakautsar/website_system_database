@@ -5,8 +5,8 @@ logPageAccess('general_approved_forms.php');
 
 // Hanya general user yang bisa akses halaman ini
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'general') {
-    logRedirect('general_approved_forms.php', 'login.html', 'Unauthorized access');
-    header('Location: login.html');
+    logRedirect('general_approved_forms.php', 'login.php', 'Unauthorized access');
+    header('Location: login.php');
     exit;
 }
 
@@ -15,17 +15,10 @@ $stmt = $pdo->prepare('SELECT * FROM rab_forms WHERE status = ? ORDER BY updated
 $stmt->execute(['approved_final']);
 $forms = $stmt->fetchAll();
 ?>
-<!doctype html>
-<html lang="id">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Form Disetujui GM - General User</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
+<?php $pageTitle = 'Form Disetujui GM - General User'; include __DIR__ . '/includes/head.php'; ?>
+<div class="page-wrapper">
+  <div class="container py-4">
+    <header class="d-flex justify-content-between align-items-center">
     <div>
       <h3>Form Disetujui GM</h3>
       <p class="text-muted mb-0">Daftar project yang sudah disetujui oleh General Manager.</p>
@@ -80,7 +73,7 @@ $forms = $stmt->fetchAll();
     </table>
   </div>
   <?php endif; ?>
+  </div>
 </div>
-</body>
-</html>
+<?php include __DIR__ . '/includes/scripts.php'; ?>
 
