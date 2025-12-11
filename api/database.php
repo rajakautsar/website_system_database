@@ -1,8 +1,8 @@
 <?php
-$host = '127.0.0.1:3307';
-$db   = 'rab_system';
-$user = 'root';
-$pass = '';
+$host = 'localhost';
+$db   = 'u489872923_rab_system';
+$user = 'u489872923_rab_system';
+$pass = 'Syaipnokav6!';
 $charset='utf8mb4';
 
 $dsn = "mysql:host=$host;port=3307;dbname=$db;charset=$charset";

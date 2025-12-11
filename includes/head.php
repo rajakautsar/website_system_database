@@ -16,6 +16,6 @@ $root = (isset($segments[0]) && $segments[0] !== '') ? '/' . $segments[0] : '';
   <title><?= htmlspecialchars($pageTitle) ?></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?= $root ?>/assets/style.css">
+  <link rel="stylesheet" href="<?= $u489872923_rab_system ?>/assets/style.css">
 </head>
 <body class="bg-light">
