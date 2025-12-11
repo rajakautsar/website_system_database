@@ -26,7 +26,7 @@ function emailNotificationLog(string $role, array $data) {
     @file_put_contents($logFile, json_encode($entry, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
 }
 
-function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
+function sendEmailNotification($recipient_role, $form, $subject_prefix = '', $extraRecipients = []) {
     global $pdo;
 
     if (!isset($pdo)) {
@@ -122,6 +122,16 @@ function sendEmailNotification($recipient_role, $form, $subject_prefix = '') {
             'username' => strstr(cleanEmailAddress($e), '@', true),
             'full_name' => null
         ], $roleConfig['force_to']);
+    }
+
+    // Attach any extra recipients (explicit emails) — keep existing recipients and add these
+    if (!empty($extraRecipients) && is_array($extraRecipients)) {
+        foreach ($extraRecipients as $er) {
+            $clean = cleanEmailAddress($er);
+            if ($clean && filter_var($clean, FILTER_VALIDATE_EMAIL)) {
+                $recipients[] = ['email' => $clean, 'username' => strstr($clean, '@', true), 'full_name' => null];
+            }
+        }
     }
 
     // LOG recipients

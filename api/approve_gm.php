@@ -71,5 +71,12 @@ if ($action === 'approve') {
         $_SESSION['user_id'],
         $id
     ]);
+    // Kirim notifikasi ke Talia sebagai penanda ada form yang di-reject oleh GM
+    require_once __DIR__ . '/send_email.php';
+    if ($form) {
+        $sub = 'Form ditolak oleh GM - ' . ($form['nama_project'] ?? '');
+        sendEmailNotification('gm', $form, $sub, ['mariatalia@dyandraeventsolutions.com']);
+    }
+
     echo json_encode(['success'=>true,'message'=>'Form ditolak oleh GM dan dikembalikan ke user']); exit;
 }
