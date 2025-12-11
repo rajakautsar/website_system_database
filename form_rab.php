@@ -200,6 +200,5 @@ $gmOptions = array_map('extractEmail', $emailConfig['roles']['gm']['force_to'] ?
   </div>
 </div>
 
-<script src="assets/app.js"></script>
 <?php include __DIR__ . '/includes/scripts.php'; ?>
 

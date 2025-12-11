@@ -30,6 +30,7 @@ return [
                 'Tessya (tessya@dyandraeventsolutions.com)',
                 'Bahri (bahri@dyandraeventsolutions.com)',
                 'Admin (admin@dyandraeventsolutions.com)',
+                'admin  (raja@dyandraeventsolutions.com)'
             ]
         ],
         'admin' => [
